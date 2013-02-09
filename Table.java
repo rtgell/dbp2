@@ -110,7 +110,10 @@ public class Table
         String [] pAttribute = attributeList.split (" ");
         int []    colPos     = match (pAttribute);
         Class []  colDomain  = extractDom (domain, colPos);
-        
+	//Test if all attributes exist
+        for(int i = 0; i < pAttribute.length; i++){
+	    if(!inAttribute(pAttribute[i])){System.out.println("Requested attribute does not exist"); System.exit(0);}
+	}
         //prepare to test if keys are present                                                                                                                            
         int []    keyPos     = match (key); //find keys in columns                                                                                                       
         boolean   keysPres   = true; //no keys are missing yet                                                                                                           
@@ -223,7 +226,7 @@ public class Table
 	} else{
 	    for ( int i=0; i<this.tuples.size(); i++ ){
 	        for ( int j=0; j<table2.tuples.size(); j++ ){
-		    if (this.tuples.get(i)==table2.tuples.get(j)){
+		    if (isEqual(this.tuples.get(i),table2.tuples.get(j))){
 		        break;
 		    } else if ( j==table2.tuples.size()-1 ){
 		        result.tuples.add( this.tuples.get(i) );
@@ -381,8 +384,12 @@ public class Table
         }
         
         int i=0;
-        while(i<this.getDomainLength() && this.getAttributeAt(i).compareToIgnoreCase(table2.getAttributeAt(i))==0 && this.getDomainAt(i).getName().compareToIgnoreCase(table2.getDomainAt(i).getName())==0){
-        	i++;
+        while(i<this.getDomainLength()){
+	    for(int j = 0; j < table2.getDomainLength(); j++){
+		if(this.getAttributeAt(i).compareToIgnoreCase(table2.getAttributeAt(j))==0 && this.getDomainAt(i).getName().compareToIgnoreCase(table2.getDomainAt(j).getName())==0){
+		    i++;
+		}
+	    }
         }
         if(i==this.getDomainLength()){
         	return true;
@@ -651,7 +658,7 @@ public class Table
     	}
     	int length = tup.length;
     	for(int i=0; i< length; i++){
-    		if(tup[i].getClass().getName()!=dom[i].getName()){
+    		if(!tup[i].getClass().getName().equalsIgnoreCase(dom[i].getName()) ){
     			return false;
     		}
     	}
@@ -826,14 +833,20 @@ public class Table
 
         return tup;
     } // extractTup
+	/**
+	*Compares two tuples and returns true if the two are the same
+	*@return true iff the tuples are the same
+	*@author Ryan Gell
+	*/
     @SuppressWarnings("unchecked")
-    private static boolean isEqual(Comparable[] table1, Comparable[] table2){
-    	int size = table1.length;
-    	int i=0;
-    	while(i<size && table1[i].compareTo(table2[i])==0){
-    		i++;
+    private static boolean isEqual(Comparable[] tup1, Comparable[] tup2){
+    	int size = tup1.length;
+	int j = 0;
+
+    	for(int i = 0; i<size ; i++){ 
+		if(tup1[i].equals(tup2[i])){j++;}
     	}
-    	if(i==size){
+    	if(j==size){
     		return true;
     	}
     	return false;
