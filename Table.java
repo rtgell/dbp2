@@ -244,16 +244,82 @@ public class Table
      * @param condition  the join condition for tuples
      * @param table2     the rhs table in the join operation
      * @return  the table representing the join (this |><| table2)
+     * @author Nicholas Sobrilsky
      */
     public Table join (String condition, Table table2)
     {
         out.println ("RA> " + name + ".join (" + condition + ", " + table2.name + ")");
 
         Table result = new Table (name + count++, new String [0], new Class [0], key);
-
-             //-----------------\\ 
-            // TO BE IMPLEMENTED \\
-           //---------------------\\ 
+	
+	String [] postfix = infix2postfix(condition);
+	boolean keepAllAttributes = (postfix[1].substring(0, 1)=="s.");
+		
+	//Sets the attribute and domain arrays of the result to the same of this table
+	for (int initialize=0; initialize<this.getAttributeLength(); initialize++){
+		result.attribute = result.attribute + this.getAttributeAt(initialize);
+		result.domain = result.domain + this.getDomainAt(initialize);
+	}
+	
+	int skipIndex = -1;
+	/*
+	Adds the attributes of table2 to result attributes
+	If the attribute is in the form of s.attrib, rename the attribute and add
+	Else, skip the table2 attribute named in the condition
+	*/
+	for (int i=0; i<table2.getAttributeLength(); i++){
+		if (keepAllAttributes && table2.getAttributeAt(i)==postfix[1]){
+			result.attribute = result.attribute + postfix[1];
+		}
+		else if (table2.getAttributeAt(i)==postfix[1]){
+			skipIndex = i;
+			continue;
+		}
+		result.attribute = result.attribute + table2.getAttributeAt(i);
+	}
+		
+	/*
+	Adds the domains of table2 to result attributes
+	If the domain belongs to a skipped attribute, skip it
+	*/
+	for (int j=0; j<table2.getDomainLength(); j++){
+		if(j==skipIndex){
+			continue;
+		}
+		result.attribute = result.attribute + table2.getDomainAt[j];
+	}
+		
+	Comparable [] resultTup;
+		
+	for(int m=0; m<this.getAttributeLength(); m++){
+		int table1MatchIndex;
+		int table2MatchIndex;
+		for (int n=0; n<table2.getAttributeLength(); n++){
+			if( this.getValueAt(columnPos(postfix[0]), this.tuples.get(m)) == table2.getValueAt(columnPos(postfix[1]), table2.tuples.get(n)) ){
+				table1MatchIndex = m;
+				table2MatchIndex = n;
+				break;
+			}
+		} //Matches a tuple from each table that meets the condition
+		
+		for(int t1FillIndex=0; t1FillIndex<this.getAttributeLength(); t1FillIndex++){
+			resultTup[t1FillIndex]=this.getValueAt(t1FillIndex, this.tuples.get(t1FillIndex));
+		} //Adds all items from table1 tuple at index m to resultTup
+		
+		int t2FillLimit=table2.getAttributeLength()-1;
+		if(keepAllAttributes){
+			t2FillLimit+=1;
+		}
+		
+		for(int t2FillIndex=0; t2FillIndex<t2FillLimit; t2FillIndex++){
+			if(table2.getAttributeAt(t2FillIndex)==postfix[1] && !keepAllAttributes){
+				continue;
+			}
+			resultTup[this.getAttributeLength()+t2FillIndex+1]=table2.getValueAt(t2FillIndex, table2.tuples.get(t2FillIndex));
+		} //Adds all unskipped items from the matched tuple in table2
+		
+		result.tuples.add(resultTup);
+	}
 
         return result;
     } // join
