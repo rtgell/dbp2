@@ -566,7 +566,8 @@ public class Table
      * Pack tuple tup into a record/byte-buffer (array of bytes).
      * @param tup  the array of attribute values forming the tuple
      * @return  a tuple packed into a record/byte-buffer
-     * 
+     * Minh Pham
+     */
     byte [] pack (Comparable [] tup)
     {
         byte [] record = new byte [tupleSize ()];
@@ -574,31 +575,55 @@ public class Table
         int     s      = 0;
         int     i      = 0;
 
-        for (int j = 0; j < domain.length; j++) {
-            switch (domain [j].getName ()) {
-            case "java.lang.Integer":
-                b = Conversions.int2ByteArray ((Integer) tup [j]);
-                s = 4;
-                break;
-            case "java.lang.String":
-                b = ((String) tup [j]).getBytes ();
-                s = 64;
-                break;
-
-             //-----------------\\ 
-            // TO BE IMPLEMENTED \\
-           //---------------------\\ 
-
-            } // switch
-            if (b == null) {
-                out.println ("Table.pack: byte array b is null");
-                return null;
-            } // if
-            for (int k = 0; k < s; k++) record [i++] = b [k];
-        } // for
+		for (int j = 0; j < domain.length; j++) {
+			if(domain [j].getName().equalsIgnoreCase("java.lang.Integer")){
+				b = Conversions.int2ByteArray ((Integer) tup [j]);
+				s = 4;
+			}
+			else if(domain [j].getName().equalsIgnoreCase("java.lang.Short")){
+				b = Conversions.short2ByteArray((Short) tup[j]);
+				s = 2;			
+			}
+			else if(domain [j].getName().equalsIgnoreCase("java.lang.String")){
+				b = ((String) tup [j]).getBytes ();
+				s = 64;
+			}
+			else if(domain [j].getName().equalsIgnoreCase("java.lang.Double")){
+				b = Conversions.double2ByteArray((Double) tup[j]);
+				s = 8;			
+			}
+			else if(domain [j].getName().equalsIgnoreCase("java.lang.Float")){
+				b = Conversions.float2ByteArray((Float) tup[j]);
+				s = 4;			
+			}
+			else if(domain [j].getName().equalsIgnoreCase("java.lang.Long")){
+				b = Conversions.long2ByteArray((Long) tup[j]);
+				s = 8;			
+			}
+			else if(domain [j].getName().equalsIgnoreCase("java.lang.Character")){
+				s = 1;			
+			}
+			else{
+				System.out.println("cannot recognize type -> cannot pack");
+			}
+			
+			
+			if (b == null) {
+				out.println ("Table.pack: byte array b is null");
+				return null;
+			} // if
+			for (int k = 0; k < s; k++) {
+				if(k<b.length){
+					record [i++] = b [k];
+				}
+				else{
+					record[i++] = (byte)'\0';
+				}
+			}
+		} // for
         return record;
     } // pack
-     */
+     
 
     /***************************************************************************
      * Unpack the record/byte-buffer (array of bytes) to reconstruct a tuple.
@@ -619,26 +644,28 @@ public class Table
      * Determine the size of tuples in this table in terms of the number of bytes
      * required to store it in a record/byte-buffer.
      * @return  the size of packed-tuples in bytes
-     * 
+     * Minh Pham
+     */
     private int tupleSize ()
     {
         int s = 0;
 
-        for (int j = 0; j < domain.length; j++) {
-            switch (domain [j].getName ()) {
-            case "java.lang.Integer": s += 4;  break;
-            case "java.lang.String":  s += 64; break;
-
-              //-----------------\\ 
-             // TO BE IMPLEMENTED \\
-            //---------------------\\ 
-
-            } // if
-        } // for
-
+	 	for (int j = 0; j < domain.length; j++) {
+			if(domain [j].getName ().equalsIgnoreCase("java.lang.Integer")) s+=4;
+			else if(domain [j].getName ().equalsIgnoreCase("java.lang.Long")) s+=8;
+			else if(domain [j].getName ().equalsIgnoreCase("java.lang.Short")) s+=2;
+			else if(domain [j].getName ().equalsIgnoreCase("java.lang.Character")) s++;
+			else if(domain [j].getName ().equalsIgnoreCase("java.lang.Double")) s+=8;
+			else if(domain [j].getName ().equalsIgnoreCase("java.lang.Float")) s+=4;
+			else if(domain [j].getName ().equalsIgnoreCase("java.lang.String")) s+=64;
+			else{
+				System.out.println("cannot recognize domain");
+			}// if clause
+		}// for loop
+		
         return s;
     } // tupleSize
-     */
+     
 
     //------------------------ Static Utility Methods --------------------------
 
