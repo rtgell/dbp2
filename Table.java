@@ -247,15 +247,12 @@ public class Table
      * @author Nicholas Sobrilsky
      */
     public Table join (String condition, Table table2)
-    {
+    { 
         out.println ("RA> " + name + ".join (" + condition + ", " + table2.name + ")");
 	
 	String [] postfix = infix2postfix(condition);
-<<<<<<< HEAD
 	boolean keepAllAttributes = (postfix[1].substring(0, 1).equals("s."));
 		 
-=======
-	boolean keepAllAttributes = (postfix[1].substring(0, 1)=="s.");
 	int attrDomSize = this.getAttributeLength() + table2.getAttributeLength();
 	
 	if(!keepAllAttributes){
@@ -264,7 +261,6 @@ public class Table
 	
 	Table result = new Table (name + count++, new String [attrDomSize], new Class [attrDomSize], key);
 		
->>>>>>> 1a0dd8b87cc738d571f305e1c9621cb88af823ff
 	//Sets the attribute and domain arrays of the result to the same of this table
 	for (int initialize=0; initialize<this.getAttributeLength(); initialize++){
 		result.attribute[initialize] = this.getAttributeAt(initialize);
@@ -302,8 +298,8 @@ public class Table
 	Comparable [] resultTup = null;
 		
 	for(int m=0; m<this.getAttributeLength(); m++){
-		int table1MatchIndex;
-		int table2MatchIndex;
+		int table1MatchIndex=0;
+		int table2MatchIndex=0;
 		for (int n=0; n<table2.getAttributeLength(); n++){
 			if( this.getValueAt(columnPos(postfix[0]), this.tuples.get(m)) == table2.getValueAt(columnPos(postfix[1]), table2.tuples.get(n)) ){
 				table1MatchIndex = m;
@@ -328,7 +324,7 @@ public class Table
 				continue;
 			}
 			//Test Fix 1
-			resultTup[this.getAttributeLength()+t2FillIndex+skipOffset]=table2.getValueAt(t2FillIndex, table2.tuples.get(table2MatchIndex);
+			resultTup[this.getAttributeLength()+t2FillIndex+skipOffset]=table2.getValueAt(t2FillIndex, table2.tuples.get(table2MatchIndex));
 			skipOffset=0;
 		} //Adds all unskipped items from the matched tuple in table2
 		
