@@ -313,7 +313,7 @@ public class Table
 		} //Matches a tuple from each table that meets the condition
 		
 		for(int t1FillIndex=0; t1FillIndex<this.getAttributeLength(); t1FillIndex++){
-			resultTup[t1FillIndex]=this.getValueAt(t1FillIndex, this.tuples.get(t1FillIndex));
+			resultTup[t1FillIndex]=this.getValueAt(t1FillIndex, this.tuples.get(table1MatchIndex));
 		} //Adds all items from table1 tuple at index m to resultTup
 		
 		int t2FillLimit=table2.getAttributeLength()-1;
@@ -328,7 +328,7 @@ public class Table
 				continue;
 			}
 			//Test Fix 1
-			resultTup[this.getAttributeLength()+t2FillIndex+skipOffset]=table2.getValueAt(t2FillIndex, table2.tuples.get(t2FillIndex));
+			resultTup[this.getAttributeLength()+t2FillIndex+skipOffset]=table2.getValueAt(t2FillIndex, table2.tuples.get(table2MatchIndex);
 			skipOffset=0;
 		} //Adds all unskipped items from the matched tuple in table2
 		
