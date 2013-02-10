@@ -253,8 +253,8 @@ public class Table
         Table result = new Table (name + count++, new String [0], new Class [0], key);
 	
 	String [] postfix = infix2postfix(condition);
-	boolean keepAllAttributes = (postfix[1].substring(0, 1)=="s.");
-		
+	boolean keepAllAttributes = (postfix[1].substring(0, 1).equals("s."));
+		 
 	//Sets the attribute and domain arrays of the result to the same of this table
 	for (int initialize=0; initialize<this.getAttributeLength(); initialize++){
 		result.attribute[initialize] = this.getAttributeAt(initialize);
@@ -899,7 +899,7 @@ public class Table
     } // findClass
 
     /***************************************************************************
-     * Extract the corresponding domains from the group.
+     * Extract the corresponding do mains from the group.
      * @param group   where to extract from
      * @param colPos  the column positions to extract
      * @return  the extracted domains
