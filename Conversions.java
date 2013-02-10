@@ -1,4 +1,3 @@
-
 /*******************************************************************************
  * @file  Conversions.java
  *
@@ -58,20 +57,31 @@ public class Conversions
      * Convert float into a byte array.
      * @param value  the float value to convert
      * @return  a corresponding byte array
+     * Minh Pham
      */
     public static byte [] float2ByteArray (float value)
     {
-        return null;
+        int bits = Float.floatToIntBits(value);
+    	byte[] bytes = new byte[4];
+    	bytes[0] = (byte)(bits & 0xff);
+    	bytes[1] = (byte)((bits >> 8) & 0xff);
+    	bytes[2] = (byte)((bits >> 16) & 0xff);
+    	bytes[3] = (byte)((bits >> 24) & 0xff);
+    	return bytes;
     } // float2ByteArray
 
     /***************************************************************************
      * Convert double into a byte array.
      * @param value  the double value to convert
      * @return  a corresponding byte array
+     * Minh Pham
      */
     public static byte [] double2ByteArray (double value)
     {
-        return null;
+        byte[] bytes = new byte[8];
+    	long lng = Double.doubleToLongBits(value);
+    	for(int i = 0; i < 8; i++) bytes[i] = (byte)((lng >> ((7 - i) * 8)) & 0xff);
+    	return bytes;
     } // double2ByteArray
 
 } // Conversions
