@@ -276,15 +276,18 @@ public class Table
 	*/
 	for (int i=0; i<table2.getAttributeLength(); i++){
 		if (keepAllAttributes && table2.getAttributeAt(i)==postfix[1]){
-			result.attribute[this.getAttributeLength()+i] = postfix[1];
+			result.attribute[this.getAttributeLength()+i+skipCounter] = postfix[1];
+			skipCounter=0;
 		}
 		else if (table2.getAttributeAt(i)==postfix[1]){
 			skipIndex = i;
 			skipCounter--;
 			continue;
 		}
-		result.attribute[this.getAttributeLength()+i+skipCounter] = table2.getAttributeAt(i);
-		skipCounter=0;
+		else{
+			result.attribute[this.getAttributeLength()+i+skipCounter] = table2.getAttributeAt(i);
+			skipCounter=0;
+		}
 	}
 		
 	/*
