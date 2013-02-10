@@ -1,4 +1,3 @@
-
 /*******************************************************************************
  * @file  FileList.java
  *
@@ -62,19 +61,27 @@ public class FileList
      * end-of-file or into a empty slot.
      * @param tuple  the tuple to add
      * @return  whether the addition succeeded
+     * Minh Pham
      */
     public boolean add (Comparable [] tuple)
     {
-        byte [] record = null;  // FIX: table.pack (tuple);
+        byte [] record = table.pack (tuple);
 
         if (record.length != recordSize) {
             out.println ("FileList.add: wrong record size " + record.length);
             return false;
         } // if
 
-             //-----------------\\
-            // TO BE IMPLEMENTED \\
-           //---------------------\\
+        for(int i =0; i<recordSize; i++){
+               try {
+				file.write(record[i]);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        }
+        
+        nRecords++;
 
         return true;
     } // add
