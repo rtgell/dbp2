@@ -318,7 +318,7 @@ public class Table
 				continue;
 			}
 			//Test Fix 1
-			resultTup[this.getAttributeLength()+t2FillIndex+skipOffset+1]=table2.getValueAt(t2FillIndex, table2.tuples.get(t2FillIndex));
+			resultTup[this.getAttributeLength()+t2FillIndex+skipOffset+1]=table2.getValueAt(t2FillIndex, table2.tuples.get(t2FillIndex + skipOffset));
 		} //Adds all unskipped items from the matched tuple in table2
 		
 		result.tuples.add(resultTup);
