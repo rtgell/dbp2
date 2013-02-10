@@ -249,11 +249,16 @@ public class Table
     public Table join (String condition, Table table2)
     {
         out.println ("RA> " + name + ".join (" + condition + ", " + table2.name + ")");
-
-        Table result = new Table (name + count++, new String [0], new Class [0], key);
 	
 	String [] postfix = infix2postfix(condition);
 	boolean keepAllAttributes = (postfix[1].substring(0, 1)=="s.");
+	int attrDomSize = this.getAttributeLength() + table2.getAttributeLength();
+	
+	if(!keepAllAttributes){
+		attrDomSize--;	
+	}
+	
+	Table result = new Table (name + count++, new String [attrDomSize], new Class [attrDomSize], key);
 		
 	//Sets the attribute and domain arrays of the result to the same of this table
 	for (int initialize=0; initialize<this.getAttributeLength(); initialize++){
