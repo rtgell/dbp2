@@ -143,7 +143,7 @@ public class Table
         Table     result     = new Table (name + count++, pAttribute, colDomain, newKey);
 
         for (Comparable [] tup : tuples) {
-            result.tuples.add (extractTup (tup, colPos));
+            result.insert(extractTup (tup, colPos));
         } // for
 
         return result;
@@ -163,12 +163,12 @@ public class Table
     {
         out.println ("RA> " + name + ".select (" + condition + ")");
 
-       String [] postfix = infix2postfix (condition);           // FIX: uncomment after impl
+       String [] postfix = infix2postfix (condition);
 	System.out.println(Arrays.toString(postfix));
         Table     result  = new Table (name + count++, attribute, domain, key);
 
         for (Comparable [] tup : tuples) {
-            if (evalTup (postfix, tup)) result.tuples.add (tup);
+            if (evalTup (postfix, tup)) result.insert(tup);
         } // for
 
         return result;
@@ -184,23 +184,18 @@ public class Table
     public Table union (Table table2)
     {
         out.println ("RA> " + name + ".union (" + table2.name + ")");
-
         Table result = new Table (name + count++, attribute, domain, key);
         if (!this.compatible(table2)){
         	return result;
         }
         int length1 = this.tuples.size();
         for(int i=0; i< length1; i++){
-        	result.tuples.add(this.tuples.get(i));
+        	result.insert(this.tuples.get(i));
         }
         int length2 = table2.tuples.size();
         for (int i=0; i< length2; i++){
-        	int j=0;
-        	while(j<length1 && !isEqual(this.tuples.get(j), table2.tuples.get(i)) ){
-        		j++;
-        	}
-        	if (j==length1){
-        		result.tuples.add(table2.tuples.get(i));
+        	if(!isEqual(table2.tuples.get(i), result.getTupFromKey(getKeyVal(table2.tuples.get(i)))) ){
+        		result.insert(table2.tuples.get(i));
         	}
         }
 
@@ -225,13 +220,11 @@ public class Table
 	    System.err.println("Error: Tables not compatible. " + name + " returned.");
 	} else{
 	    for ( int i=0; i<this.tuples.size(); i++ ){
-	        for ( int j=0; j<table2.tuples.size(); j++ ){
-		    if (isEqual(this.tuples.get(i),table2.tuples.get(j))){
+		    if (isEqual(this.tuples.get(i),table2.getTupFromKey(getKeyVal(this.tuples.get(i))) ) ){
 		        break;
-		    } else if ( j==table2.tuples.size()-1 ){
-		        result.tuples.add( this.tuples.get(i) );
+		    } else{
+		        result.insert( this.tuples.get(i) );
 		    }
-		}
 	    }
 	}
 
@@ -665,7 +658,22 @@ public class Table
 		
         return s;
     } // tupleSize
-     
+    /**
+    * Returns the value held in the key domains of a tuple
+    * @author Ryan Gell 
+    */
+    public Comparable[] getKeyVal(Comparable[] tuple){
+    	Comparable[] keyVal = new Comparable [key.length];
+	int [] cols = match(key);
+	for(int i = 0; i < keyVal.length; i++) keyVal [i] = tuple[cols[i]];
+	return keyVal;
+    }
+    /**
+    *
+    */
+    public Comparable[] getTupFromKey(Comparable[] key){
+    	return index.get(new KeyType(key));
+    }
 
     //------------------------ Static Utility Methods --------------------------
 
@@ -869,7 +877,8 @@ public class Table
     private static boolean isEqual(Comparable[] tup1, Comparable[] tup2){
     	int size = tup1.length;
 	int j = 0;
-
+	if(tup1 == null && tup2 == null){return true;}
+	else if(tup1 == null || tup2 == null){return false;}
     	for(int i = 0; i<size ; i++){ 
 		if(tup1[i].equals(tup2[i])){j++;}
     	}
