@@ -311,11 +311,14 @@ public class Table
 			t2FillLimit+=1;
 		}
 		
+		int skipOffset = 0;
 		for(int t2FillIndex=0; t2FillIndex<t2FillLimit; t2FillIndex++){
 			if(table2.getAttributeAt(t2FillIndex)==postfix[1] && !keepAllAttributes){
+				skipOffset--;
 				continue;
 			}
-			resultTup[this.getAttributeLength()+t2FillIndex+1]=table2.getValueAt(t2FillIndex, table2.tuples.get(t2FillIndex));
+			//Test Fix 1
+			resultTup[this.getAttributeLength()+t2FillIndex+skipOffset+1]=table2.getValueAt(t2FillIndex, table2.tuples.get(t2FillIndex));
 		} //Adds all unskipped items from the matched tuple in table2
 		
 		result.tuples.add(resultTup);
