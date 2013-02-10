@@ -301,7 +301,7 @@ public class Table
 		result.domain[this.getDomainLength()+j] = table2.getDomainAt(j);
 	}
 		
-	Comparable [] resultTup = null;
+	Comparable [] resultTup;
 		
 	for(int m=0; m<this.getAttributeLength(); m++){
 		int table1MatchIndex=0;
