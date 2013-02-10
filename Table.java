@@ -289,7 +289,7 @@ public class Table
 		result.domain[j] = table2.getDomainAt(j);
 	}
 		
-	Comparable [] resultTup;
+	Comparable [] resultTup = null;
 		
 	for(int m=0; m<this.getAttributeLength(); m++){
 		int table1MatchIndex;
