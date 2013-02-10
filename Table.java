@@ -257,8 +257,8 @@ public class Table
 		
 	//Sets the attribute and domain arrays of the result to the same of this table
 	for (int initialize=0; initialize<this.getAttributeLength(); initialize++){
-		result.attribute = result.attribute + this.getAttributeAt(initialize);
-		result.domain = result.domain + this.getDomainAt(initialize);
+		result.attribute[initialize] = this.getAttributeAt(initialize);
+		result.domain[initialize] = this.getDomainAt(initialize);
 	}
 	
 	int skipIndex = -1;
@@ -269,24 +269,24 @@ public class Table
 	*/
 	for (int i=0; i<table2.getAttributeLength(); i++){
 		if (keepAllAttributes && table2.getAttributeAt(i)==postfix[1]){
-			result.attribute = result.attribute + postfix[1];
+			result.attribute[i] = postfix[1];
 		}
 		else if (table2.getAttributeAt(i)==postfix[1]){
 			skipIndex = i;
 			continue;
 		}
-		result.attribute = result.attribute + table2.getAttributeAt(i);
+		result.attribute[i] = table2.getAttributeAt(i);
 	}
 		
 	/*
-	Adds the domains of table2 to result attributes
+	Adds the domains of table2 to result domain
 	If the domain belongs to a skipped attribute, skip it
 	*/
 	for (int j=0; j<table2.getDomainLength(); j++){
 		if(j==skipIndex){
 			continue;
 		}
-		result.attribute = result.attribute + table2.getDomainAt[j];
+		result.domain[j] = table2.getDomainAt(j);
 	}
 		
 	Comparable [] resultTup;
