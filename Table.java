@@ -275,12 +275,12 @@ public class Table
 	Else, skip the table2 attribute named in the condition
 	*/
 	for (int i=0; i<table2.getAttributeLength(); i++){
-		if(this.getAttributeLength()+i+skipCounter>=result.attribute.getLength()){
+		if(this.getAttributeLength()+i+skipCounter>=result.attribute.length){
 			System.out.println("Error: Out of Bounds. Yeah.");
 		}
 		if (keepAllAttributes && table2.getAttributeAt(i)==postfix[1]){
 			result.attribute[this.getAttributeLength()+i+skipCounter] = postfix[1];
-					if(this.getAttributeLength()+i+skipCounter>=result.attribute.getLength()){
+					if(this.getAttributeLength()+i+skipCounter>=result.attribute.length){
 			System.out.println("Error: Out of Bounds. Yeah.");
 		}
 			skipCounter=0;
@@ -289,13 +289,13 @@ public class Table
 		else if (table2.getAttributeAt(i)==postfix[1]){
 			skipIndex = i;
 			skipCounter--;
-					if(this.getAttributeLength()+i+skipCounter>=result.attribute.getLength()){
+					if(this.getAttributeLength()+i+skipCounter>=result.attribute.length){
 			System.out.println("Error: Out of Bounds. Yeah.");
 		}
 		}
 		else{
 			result.attribute[this.getAttributeLength()+i+skipCounter] = table2.getAttributeAt(i);
-					if(this.getAttributeLength()+i+skipCounter>=result.attribute.getLength()){
+					if(this.getAttributeLength()+i+skipCounter>=result.attribute.length){
 			System.out.println("Error: Out of Bounds. Yeah.");
 		}
 			skipCounter=0;
