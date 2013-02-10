@@ -274,30 +274,18 @@ public class Table
 	If the attribute is in the form of s.attrib, rename the attribute and add
 	Else, skip the table2 attribute named in the condition
 	*/
-	for (int i=0; i<table2.getAttributeLength(); i++){
-		if(this.getAttributeLength()+i+skipCounter>=result.attribute.length){
-			System.out.println("Error: Out of Bounds. Yeah.");
-		}
+	for (int i=0; i<table2.getAttributeLength()-1; i++){
 		if (keepAllAttributes && table2.getAttributeAt(i)==postfix[1]){
 			result.attribute[this.getAttributeLength()+i+skipCounter] = postfix[1];
-					if(this.getAttributeLength()+i+skipCounter>=result.attribute.length){
-			System.out.println("Error: Out of Bounds. Yeah.");
-		}
 			skipCounter=0;
 			
 		}
 		else if (table2.getAttributeAt(i)==postfix[1]){
 			skipIndex = i;
 			skipCounter--;
-					if(this.getAttributeLength()+i+skipCounter>=result.attribute.length){
-			System.out.println("Error: Out of Bounds. Yeah.");
-		}
 		}
 		else{
 			result.attribute[this.getAttributeLength()+i+skipCounter] = table2.getAttributeAt(i);
-					if(this.getAttributeLength()+i+skipCounter>=result.attribute.length){
-			System.out.println("Error: Out of Bounds. Yeah.");
-		}
 			skipCounter=0;
 		}
 	}
