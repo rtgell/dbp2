@@ -323,7 +323,7 @@ public class Table
 		skipCounter = 0;
 		for(int t2FillIndex=0; t2FillIndex<t2FillLimit; t2FillIndex++){
 			if(table2.getAttributeAt(t2FillIndex)==postfix[1] && !keepAllAttributes){
-				skipOffset--;
+				skipCounter--;
 				continue;
 			}
 			//Test Fix 1
