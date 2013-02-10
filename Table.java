@@ -268,6 +268,7 @@ public class Table
 	}
 	
 	int skipIndex = -1;
+	int skipCounter = 0;
 	/*
 	Adds the attributes of table2 to result attributes
 	If the attribute is in the form of s.attrib, rename the attribute and add
@@ -279,9 +280,11 @@ public class Table
 		}
 		else if (table2.getAttributeAt(i)==postfix[1]){
 			skipIndex = i;
+			skipCounter--;
 			continue;
 		}
-		result.attribute[this.getAttributeLength()+i] = table2.getAttributeAt(i);
+		result.attribute[this.getAttributeLength()+i+skipCounter] = table2.getAttributeAt(i);
+		skipCounter=0;
 	}
 		
 	/*
@@ -317,15 +320,15 @@ public class Table
 			t2FillLimit+=1;
 		}
 		
-		int skipOffset = 0;
+		skipCounter = 0;
 		for(int t2FillIndex=0; t2FillIndex<t2FillLimit; t2FillIndex++){
 			if(table2.getAttributeAt(t2FillIndex)==postfix[1] && !keepAllAttributes){
 				skipOffset--;
 				continue;
 			}
 			//Test Fix 1
-			resultTup[this.getAttributeLength()+t2FillIndex+skipOffset]=table2.getValueAt(t2FillIndex, table2.tuples.get(table2MatchIndex));
-			skipOffset=0;
+			resultTup[this.getAttributeLength()+t2FillIndex+skipCounter]=table2.getValueAt(t2FillIndex, table2.tuples.get(table2MatchIndex));
+			skipCounter=0;
 		} //Adds all unskipped items from the matched tuple in table2
 		
 		result.tuples.add(resultTup);
