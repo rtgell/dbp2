@@ -338,7 +338,7 @@ public class Table
 		result.tuples.add(m, resultTup);
 		System.out.println("Test after add: ");
 		for(int fuck=0; fuck<attrDomSize; fuck++){
-			System.out.println(resultTup[fuck]);
+			System.out.println(result.tuples.get(m)[fuck]);
 		}
 	}
 	System.out.println("Test before result: ");
