@@ -318,7 +318,7 @@ public class Table
 		
 		for(int t1FillIndex=0; t1FillIndex<this.getAttributeLength(); t1FillIndex++){
 			resultTup[t1FillIndex]=this.getValueAt(t1FillIndex, this.tuples.get(m));
-			System.out.println(this.tuples.get(m).toString())
+			System.out.println(this.tuples.get(m).toString());
 		} //Adds all items from table1 tuple at index m to resultTup
 		
 		int t2FillLimit=table2.getAttributeLength()-1;
