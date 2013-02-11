@@ -341,7 +341,7 @@ public class Table
 			resultTup[this.getAttributeLength()+t2FillIndex+skipCounter]=table2.getValueAt(t2FillIndex, table2.tuples.get(table2MatchIndex));
 		} //Adds all unskipped items from the matched tuple in table2
 		
-		result.tuples.add(m, resultTup);
+		result.(m, resultTup);
 	}
         return result;
     } // join
