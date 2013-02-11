@@ -305,6 +305,7 @@ public class Table
 	}
 		
 	Comparable [] resultTup = new Comparable[attrDomSize];
+	boolean noMatch=false;
 		
 	for(int m=0; m<this.tuples.size(); m++){
 		int table1MatchIndex=0;
@@ -314,7 +315,14 @@ public class Table
 				table2MatchIndex = n;
 				break;
 			}
+			else if(n==table2.tuples.size()-1){
+				noMatch=true;
+			}
 		} //Matches a tuple from each table that meets the condition
+		
+		if(noMatch){
+			continue;
+		}
 		
 		for(int t1FillIndex=0; t1FillIndex<this.getAttributeLength(); t1FillIndex++){
 			resultTup[t1FillIndex]=this.getValueAt(t1FillIndex, this.tuples.get(m));
