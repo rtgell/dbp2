@@ -4,6 +4,7 @@
  * @author   John Miller
  */
 
+import java.nio.ByteBuffer;
 import java.io.Serializable;
 import static java.lang.Boolean.*;
 import static java.lang.System.out;
@@ -708,18 +709,40 @@ public class Table
 
     /***************************************************************************
      * Unpack the record/byte-buffer (array of bytes) to reconstruct a tuple.
-     * @param record  the byte-buffer in which the tuple is packed
+     * @param record the byte-buffer in which the tuple is packed
      * @return  an unpacked tuple
-     * 
+     * @author Zachary Freeland
+     */
     Comparable [] unpack (byte [] record)
     {
-             //-----------------\\ 
-            // TO BE IMPLEMENTED \\
-           //---------------------\\ 
+	Comparable[] result = new Comparable[domain.length];
+	ByteBuffer bb = ByteBuffer.wrap(record);
 
-        return null;
+	for(int j=0; j < domain.length; j++) {
+	    if( domain [j].getName().equalsIgnoreCase("java.lang.Integer") ) {
+		result[j] = bb.getInt();
+	    } else if( domain [j].getName().equalsIgnoreCase("java.lang.Short") ) {
+		result[j] = bb.getShort();
+	    } else if( domain [j].getName().equalsIgnoreCase("java.lang.String") ) {
+		byte[] temp = new byte[64];
+		bb.get(temp);
+		result[j] = new String(temp);
+	    } else if( domain [j].getName().equalsIgnoreCase("java.lang.Double") ) {
+		result[j] = bb.getDouble();
+	    } else if( domain [j].getName().equalsIgnoreCase("java.lang.Float") ) {
+		result[j] = bb.getFloat();
+	    } else if( domain [j].getName().equalsIgnoreCase("java.lang.Long") ) {
+		result[j] = bb.getLong();
+	    } else if( domain [j].getName().equalsIgnoreCase("java.lang.Character") ) {
+		result[j] = bb.getChar();
+	    } else {
+		System.out.println("cannot recognize type -> cannot pack");
+	    }
+	}//for
+
+        return result;
     } // unpack
-     */
+
 
     /***************************************************************************
      * Determine the size of tuples in this table in terms of the number of bytes
