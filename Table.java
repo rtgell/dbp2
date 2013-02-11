@@ -294,11 +294,14 @@ public class Table
 	Adds the domains of table2 to result domain
 	If the domain belongs to a skipped attribute, skip it
 	*/
-	for (int j=0; j<table2.getDomainLength()-1; j++){
+	skipCounter=0;
+	for (int j=0; j<table2.getDomainLength(); j++){
 		if(j==skipIndex){
+			skipCounter--;
 			continue;
 		}
-		result.domain[this.getDomainLength()+j] = table2.getDomainAt(j);
+		result.domain[this.getDomainLength()+skipCounter+j] = table2.getDomainAt(j);
+		skipCounter=0;
 	}
 		
 	Comparable [] resultTup = new Comparable[attrDomSize];
@@ -307,27 +310,14 @@ public class Table
 		int table1MatchIndex=0;
 		int table2MatchIndex=0;
 		for (int n=0; n<table2.tuples.size(); n++){
-			try{
-				Comparable [] test1 =this.tuples.get(m);
-			}
-			catch(IndexOutOfBoundsException e){
-				System.err.println("Out of bounds on m(value "+m+"): "+ e.getMessage());
-			}
-			try{
-				Comparable [] test2 =table2.tuples.get(n);
-			}
-			catch(IndexOutOfBoundsException e){
-				System.err.println("Out of bounds on n(value "+n+"): "+ e.getMessage());
-			}
 			if( this.getValueAt(this.columnPos(postfix[0]), this.tuples.get(m)) == table2.getValueAt(table2.columnPos(postfix[1]), table2.tuples.get(n)) ){
-				table1MatchIndex = m;
 				table2MatchIndex = n;
 				break;
 			}
 		} //Matches a tuple from each table that meets the condition
 		
 		for(int t1FillIndex=0; t1FillIndex<this.getAttributeLength(); t1FillIndex++){
-			resultTup[t1FillIndex]=this.getValueAt(t1FillIndex, this.tuples.get(table1MatchIndex));
+			resultTup[t1FillIndex]=this.getValueAt(t1FillIndex, this.tuples.get(m));
 		} //Adds all items from table1 tuple at index m to resultTup
 		
 		int t2FillLimit=table2.getAttributeLength()-1;
@@ -346,6 +336,7 @@ public class Table
 		} //Adds all unskipped items from the matched tuple in table2
 		
 		result.tuples.add(resultTup);
+		System.out.println(this.tuples.get(m).getName());
 	}
 
         return result;
