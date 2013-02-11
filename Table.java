@@ -341,7 +341,7 @@ public class Table
 			resultTup[this.getAttributeLength()+t2FillIndex+skipCounter]=table2.getValueAt(t2FillIndex, table2.tuples.get(table2MatchIndex));
 		} //Adds all unskipped items from the matched tuple in table2
 		
-		result.(m, resultTup);
+		result.insert(resultTup);
 	}
         return result;
     } // join
@@ -733,6 +733,8 @@ public class Table
 		result[j] = bb.getChar();
 	    } else if( domain [j].getName().equalsIgnoreCase("java.lang.String") ) {
 		byte[] temp = new byte[64];
+		if(bb.remaining() < 64)
+		    temp = new byte[bb.remaining()];
 		bb.get(temp);
 		int i=0;
 		for(; i < 64 && temp[i] !='\0'; i++);//fixes alignment problems if string length is less than 15 characters
