@@ -98,7 +98,8 @@ public class FileList
         byte [] record = new byte [recordSize];
 
 	try {
-	    file.readFully(record, recordSize*i, recordSize); //read recordSize bytes into record byte[] from file starting at offset recordSize*i
+	    file.seek(recordSize*i);
+	    file.readFully(record); //read recordSize bytes into record byte[] from file starting at offset recordSize*i
 	} catch (IOException e) {
 	    out.println ("Filelist.get failed to read - "+e);
 	}

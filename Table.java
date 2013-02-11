@@ -722,10 +722,6 @@ public class Table
 		result[j] = bb.getInt();
 	    } else if( domain [j].getName().equalsIgnoreCase("java.lang.Short") ) {
 		result[j] = bb.getShort();
-	    } else if( domain [j].getName().equalsIgnoreCase("java.lang.String") ) {
-		byte[] temp = new byte[64];
-		bb.get(temp);
-		result[j] = new String(temp);
 	    } else if( domain [j].getName().equalsIgnoreCase("java.lang.Double") ) {
 		result[j] = bb.getDouble();
 	    } else if( domain [j].getName().equalsIgnoreCase("java.lang.Float") ) {
@@ -734,6 +730,10 @@ public class Table
 		result[j] = bb.getLong();
 	    } else if( domain [j].getName().equalsIgnoreCase("java.lang.Character") ) {
 		result[j] = bb.getChar();
+	    } else if( domain [j].getName().equalsIgnoreCase("java.lang.String") ) {
+		byte[] temp = new byte[64];
+		bb.get(temp);
+		result[j] = new String(temp);
 	    } else {
 		System.out.println("cannot recognize type -> cannot pack");
 	    }
