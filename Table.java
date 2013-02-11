@@ -334,7 +334,7 @@ public class Table
 			}
 			resultTup[this.getAttributeLength()+t2FillIndex+skipCounter]=table2.getValueAt(t2FillIndex, table2.tuples.get(table2MatchIndex));
 			skipCounter=0;
-			System.out.println(table2.getValueAt( t1FillIndex, table2.tuples.get(table2MatchIndex)) );
+			System.out.println(table2.getValueAt( t2FillIndex, table2.tuples.get(table2MatchIndex)) );
 		} //Adds all unskipped items from the matched tuple in table2
 		
 		result.tuples.add(resultTup);
