@@ -311,19 +311,19 @@ public class Table
 				Comparable [] test1 =this.tuples.get(m);
 			}
 			catch(IndexOutOfBoundsException e){
-				System.out.println("Out of bounds on m");
+				System.err.println("Out of bounds on m(value "+m+"): "+ e.getMessage());
 			}
 			try{
 				Comparable [] test2 =table2.tuples.get(n);
 			}
 			catch(IndexOutOfBoundsException e){
-				System.out.println("Out of bounds on n");
+				System.err.println("Out of bounds on n(value "+n+"): "+ e.getMessage());
 			}
-			if( this.getValueAt(this.columnPos(postfix[0]), this.tuples.get(m)) == table2.getValueAt(table2.columnPos(postfix[1]), table2.tuples.get(n)) ){
-				table1MatchIndex = m;
-				table2MatchIndex = n;
-				break;
-			}
+		//	if( this.getValueAt(this.columnPos(postfix[0]), this.tuples.get(m)) == table2.getValueAt(table2.columnPos(postfix[1]), table2.tuples.get(n)) ){
+		//		table1MatchIndex = m;
+		//		table2MatchIndex = n;
+		//		break;
+		//	}
 		} //Matches a tuple from each table that meets the condition
 		
 		for(int t1FillIndex=0; t1FillIndex<this.getAttributeLength(); t1FillIndex++){
