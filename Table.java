@@ -257,6 +257,7 @@ public class Table
 	if(!keepAllAttributes){
 		attrDomSize--;	
 	}
+	System.out.println(attrDomSize);
 	
 	Table result = new Table (name + count++, new String [attrDomSize], new Class [attrDomSize], key);
 		
@@ -279,7 +280,7 @@ public class Table
 			skipCounter=0;
 			
 		}
-		else if (table2.getAttributeAt(i)==postfix[1]){
+		else if (table2.getAttributeAt(i).toString()==postfix[1]){
 			skipIndex = i;
 			skipCounter--;
 		}
@@ -336,7 +337,7 @@ public class Table
 		
 		skipCounter = 0;
 		for(int t2FillIndex=0; t2FillIndex<t2FillLimit; t2FillIndex++){
-			if(table2.getValueAt(t2FillIndex, table2.tuples.get(table2MatchIndex))==postfix[1] && !keepAllAttributes){
+			if(table2.getValueAt(t2FillIndex, table2.tuples.get(table2MatchIndex)).toString()==postfix[1] && !keepAllAttributes){
 				skipCounter--;
 				continue;
 			}
@@ -345,18 +346,7 @@ public class Table
 		} //Adds all unskipped items from the matched tuple in table2
 		
 		result.tuples.add(m, resultTup);
-		System.out.println("Test after add: ");
-		for(int tk=0; tk<=m; tk++){
-			System.out.println("For m="+ m+", item "+tk+": ");
-			System.out.println(result.tuples.get(tk)[0]);
-		}
 	}
-	//System.out.println("Test before result: ");
-	//for (int tk=0; tk<4; tk++){
-	//	for(int kj=0; kj<attrDomSize; kj++){
-	//		System.out.println(result.tuples.get(tk)[kj]);
-	//	}
-	//}
         return result;
     } // join
 /***************************************************************************
