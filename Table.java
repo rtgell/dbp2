@@ -304,10 +304,10 @@ public class Table
 		}
 	}
 		
-	Comparable [] resultTup = new Comparable[attrDomSize];
 	boolean noMatch=false;
 		
 	for(int m=0; m<this.tuples.size(); m++){
+		Comparable [] resultTup = new Comparable[attrDomSize];
 		int table1MatchIndex=0;
 		int table2MatchIndex=0;
 		for (int n=0; n<table2.tuples.size(); n++){
