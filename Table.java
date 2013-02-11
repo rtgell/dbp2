@@ -347,10 +347,9 @@ public class Table
 		result.tuples.add(m, resultTup);
 		System.out.println("Test after add: ");
 		for(int tk=0; tk<=m; tk++){
-			System.out.println("For m="+ m+": ");
-		for(int fuck=0; fuck<attrDomSize; fuck++){
-			System.out.println(result.tuples.get(tk)[fuck]);
-		}}
+			System.out.println("For m="+ m+", item "+tk+": ");
+			System.out.println(result.tuples.get(tk)[0]);
+		}
 	}
 	//System.out.println("Test before result: ");
 	//for (int tk=0; tk<4; tk++){
