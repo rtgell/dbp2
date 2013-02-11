@@ -247,6 +247,7 @@ public class Table
      */
     public Table join (String condition, Table table2)
     { 
+    { 
         out.println ("RA> " + name + ".join (" + condition + ", " + table2.name + ")");
 	
 	String [] postfix = infix2postfix(condition);
@@ -273,20 +274,18 @@ public class Table
 	If the attribute is in the form of s.attrib, rename the attribute and add
 	Else, skip the table2 attribute named in the condition
 	*/
-	for (int i=0; i<table2.getAttributeLength()-1; i++){
-		if (keepAllAttributes && table2.getAttributeAt(i)==postfix[1]){
-			System.out.println("We should never get here");
+	for (int i=0; i<table2.getAttributeLength(); i++){
+		if (keepAllAttributes && table2.getAttributeAt(i).equals(postfix[1])){
 			result.attribute[this.getAttributeLength()+i+skipCounter] = postfix[1];
 			skipCounter=0;
 			
 		}
-		else if (table2.getAttributeAt(i).toString()==postfix[1]){
+		else if (table2.getAttributeAt(i).equals(postfix[1])){
 			skipIndex = i;
 			skipCounter--;
 		}
 		else{
 			result.attribute[this.getAttributeLength()+i+skipCounter] = table2.getAttributeAt(i);
-			skipCounter=0;
 		}
 	}
 		
@@ -295,13 +294,12 @@ public class Table
 	If the domain belongs to a skipped attribute, skip it
 	*/
 	skipCounter=0;
-	for (int j=0; j<table2.getDomainLength()-1; j++){
+	for (int j=0; j<table2.getDomainLength(); j++){
 		if(j==skipIndex){
 			skipCounter--;
 		}
 		else{
 			result.domain[this.getDomainLength()+skipCounter+j] = table2.getDomainAt(j);
-			skipCounter=0;
 		}
 	}
 		
@@ -330,19 +328,18 @@ public class Table
 			resultTup[t1FillIndex]=this.getValueAt(t1FillIndex, this.tuples.get(m));
 		} //Adds all items from table1 tuple at index m to resultTup
 		
-		int t2FillLimit=table2.getAttributeLength()-1;
+		int t2FillLimit=table2.getAttributeLength();
 		if(keepAllAttributes){
 			t2FillLimit+=1;
 		}
 		
 		skipCounter = 0;
 		for(int t2FillIndex=0; t2FillIndex<t2FillLimit; t2FillIndex++){
-			if(table2.getValueAt(t2FillIndex, table2.tuples.get(table2MatchIndex)).toString()==postfix[1] && !keepAllAttributes){
+			if(table2.getAttributeAt(t2FillIndex).equals(postfix[1]) && !keepAllAttributes){
 				skipCounter--;
 				continue;
 			}
 			resultTup[this.getAttributeLength()+t2FillIndex+skipCounter]=table2.getValueAt(t2FillIndex, table2.tuples.get(table2MatchIndex));
-			skipCounter=0;
 		} //Adds all unskipped items from the matched tuple in table2
 		
 		result.tuples.add(m, resultTup);
