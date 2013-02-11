@@ -730,7 +730,7 @@ public class Table
 	    } else if( domain [j].getName().equalsIgnoreCase("java.lang.Long") ) {
 		result[j] = bb.getLong();
 	    } else if( domain [j].getName().equalsIgnoreCase("java.lang.Character") ) {
-		result[j] = bb.getChar();
+		result[j] = (char) bb.get();
 	    } else if( domain [j].getName().equalsIgnoreCase("java.lang.String") ) {
 		byte[] temp = new byte[64];
 		if(bb.remaining() < 64)
