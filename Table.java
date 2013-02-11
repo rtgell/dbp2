@@ -295,7 +295,7 @@ public class Table
 	If the domain belongs to a skipped attribute, skip it
 	*/
 	skipCounter=0;
-	for (int j=0; j<table2.getDomainLength(); j++){
+	for (int j=0; j<table2.getDomainLength()-1; j++){
 		if(j==skipIndex){
 			skipCounter--;
 		}
