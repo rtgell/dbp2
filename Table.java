@@ -319,7 +319,6 @@ public class Table
 		
 		for(int t1FillIndex=0; t1FillIndex<this.getAttributeLength(); t1FillIndex++){
 			resultTup[t1FillIndex]=this.getValueAt(t1FillIndex, this.tuples.get(m));
-			System.out.println(this.getValueAt( t1FillIndex, this.tuples.get(m) );
 		} //Adds all items from table1 tuple at index m to resultTup
 		
 		int t2FillLimit=table2.getAttributeLength()-1;
@@ -335,6 +334,7 @@ public class Table
 			}
 			resultTup[this.getAttributeLength()+t2FillIndex+skipCounter]=table2.getValueAt(t2FillIndex, table2.tuples.get(table2MatchIndex));
 			skipCounter=0;
+			System.out.println(table2.getValueAt( t1FillIndex, table2.tuples.get(table2MatchIndex) );
 		} //Adds all unskipped items from the matched tuple in table2
 		
 		result.tuples.add(resultTup);
