@@ -340,7 +340,7 @@ public class Table
 		//	System.out.println(resultTup[fucker]);
 		//}
 		
-		result.tuples.set(m, resultTup);
+		result.insert(resultTup);
 	}
 
         return result;
