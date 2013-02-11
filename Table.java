@@ -341,7 +341,11 @@ public class Table
 		
 		result.insert(resultTup);
 	}
-	result.print();
+	for (int tk=0; tk<4; tk++){
+		for(int kj=0; kj<attrDomSize; kj++){
+			System.out.println(result.tuples.get(tk)[kj]);
+		}
+	}
         return result;
     } // join
 /***************************************************************************
