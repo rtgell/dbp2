@@ -889,18 +889,15 @@ public class Table
 	* @return int between 8 and 0
 	*/
 	private static int precedenceInt(String x){
-		int temp;
-		switch(x){
-			case "==": temp = 8; break;
-			case "!=": temp = 7; break;
-			case "<": temp = 6; break;
-			case "<=": temp = 5; break;
-			case ">": temp = 4; break;
-			case ">=": temp = 3; break;
-			case "&": temp = 2; break;
-			case "|": temp = 1; break;
-		default: temp = 0;}
-		return temp;
+		if(x.equals("==")){ return 8;}
+        	else if(x.equals("!=")){ return 7;}
+        	else if(x.equals("<")){  return 6;}
+        	else if(x.equals("<=")){ return 5;}
+        	else if(x.equals(">")){  return 4;}
+        	else if(x.equals(">=")){ return 3;}
+        	else if(x.equals("&")){ return 2;}
+        	else if(x.equals("|")){ return 1;}
+        	else { return 0; }
 	}
     /***************************************************************************
      * Find the classes in the "java.lang" package with given names.
