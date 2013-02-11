@@ -815,15 +815,13 @@ public class Table
     @SuppressWarnings("unchecked")
     private static boolean compare (Comparable x, String op , Comparable y)
     {
-        switch (op) {
-        case "==": return x.compareTo (y) == 0;
-        case "!=": return x.compareTo (y) != 0;
-        case "<":  return x.compareTo (y) <  0;
-        case "<=": return x.compareTo (y) <= 0;
-        case ">":  return x.compareTo (y) >  0;
-        case ">=": return x.compareTo (y) >= 0;
-        default: { out.println ("compare: error - unexpected op"); return false; }
-        } // switch
+        if(op.equals("==")) return x.compareTo (y) == 0;
+        else if(op.equals("!=")) return x.compareTo (y) != 0;
+        else if(op.equals("<")) return x.compareTo (y) < 0;
+        else if(op.equals("<=")) return x.compareTo (y) <= 0;
+        else if(op.equals(">"))return x.compareTo (y) > 0;
+        else if(op.equals(">="))return x.compareTo (y) >= 0;
+        else { out.println ("compare: error - unexpected op"); return false; }
     } // compare
 
     /***************************************************************************
