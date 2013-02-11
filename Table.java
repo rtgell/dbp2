@@ -294,7 +294,7 @@ public class Table
 	Adds the domains of table2 to result domain
 	If the domain belongs to a skipped attribute, skip it
 	*/
-	for (int j=0; j<table2.getDomainLength()-1; j++){
+	for (int j=0; j<table2.getDomainLength(); j++){
 		if(j==skipIndex){
 			continue;
 		}
