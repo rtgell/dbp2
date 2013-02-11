@@ -682,6 +682,7 @@ public class Table
 				s = 8;			
 			}
 			else if(domain [j].getName().equalsIgnoreCase("java.lang.Character")){
+			    b[0] = (byte) ((char) tup[j] & 0xff);
 				s = 1;			
 			}
 			else{
@@ -733,7 +734,12 @@ public class Table
 	    } else if( domain [j].getName().equalsIgnoreCase("java.lang.String") ) {
 		byte[] temp = new byte[64];
 		bb.get(temp);
-		result[j] = new String(temp);
+		int i=0;
+		for(; i < 64 && temp[i] !='\0'; i++);//fixes alignment problems if string length is less than 15 characters
+		byte[] temp2 = new byte[i];
+		for(i=0; i < 64 && temp[i] !='\0'; i++)
+		    temp2[i] = temp[i];
+		result[j] = new String(temp2);
 	    } else {
 		System.out.println("cannot recognize type -> cannot pack");
 	    }
