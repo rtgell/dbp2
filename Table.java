@@ -68,8 +68,7 @@ public class Table
         attribute = _attribute;
         domain    = _domain;
         key       = _key;
-        tuples    = new ArrayList <Comparable []> ();                // also try FileList, see below
-//      tuples    = new FileList (this, tupleSize ());
+        tuples    = new FileList (this, tupleSize ());
         index     = new TreeMap <KeyType, Comparable[]> ();                  // also try BPTreeMap, LinHash or ExtHash
     } // Table
 
