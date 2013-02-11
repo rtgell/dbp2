@@ -1,17 +1,13 @@
-dbp2
-====
+Project 2
+CSCI 4370
+Spring 2013
+Group 1: Ryan Gell, Zachary Freeland, Nicholas Sobrilsky, Minh Pham
 
-dbp2
-To Be Implemented
-Indexing on all operations
+Project compiles as expected using the javac command on any .java file with a main method.
+The commands:
 
-FileList:
--add(Dependent on Pack)
--get(Dependent on Unpack)
+javac MovieDB.java
+java MovieDB
 
-Table:
-Join
-Pack
-Unpack(Dependent on tupleSize)
-tupleSize
+Will show off the cabailities of the relational algebra operators implemented in Table.java
 
