@@ -280,7 +280,7 @@ public class Table
 			skipCounter=0;
 			
 		}
-		else if (table2.getAttributeAt(i).toString()=="name"){
+		else if (table2.getAttributeAt(i).toString()==postfix[1]){
 			skipIndex = i;
 			skipCounter--;
 		}
