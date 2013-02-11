@@ -91,16 +91,19 @@ public class FileList
      * record.
      * @param i  the index of the tuple to get
      * @return  the ith tuple
+     * @author Zachary Freeland
      */
     public Comparable [] get (int i)
     {
         byte [] record = new byte [recordSize];
 
-             //-----------------\\
-            // TO BE IMPLEMENTED \\
-           //---------------------\\
+	try {
+	    file.readFully(record, recordSize*i, recordSize); //read recordSize bytes into record byte[] from file starting at offset recordSize*i
+	} catch (IOException e) {
+	    out.println ("Filelist.get failed to read - "+e);
+	}
 
-        return null;   // FIX: table.unpack (record);
+        return table.unpack (record);
     } // get
 
     /***************************************************************************
