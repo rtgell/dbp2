@@ -312,7 +312,7 @@ public class Table
 		int table1MatchIndex=0;
 		int table2MatchIndex=0;
 		for (int n=0; n<table2.tuples.size(); n++){
-			if( this.getValueAt(this.columnPos(postfix[0]), this.tuples.get(m)) == table2.getValueAt(table2.columnPos(postfix[1]), table2.tuples.get(n)) ){
+			if( this.getValueAt(this.columnPos(postfix[0]), this.tuples.get(m)).equals(table2.getValueAt(table2.columnPos(postfix[1]), table2.tuples.get(n))) ){
 				table2MatchIndex = n;
 				break;
 			}
