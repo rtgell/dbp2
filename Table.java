@@ -682,7 +682,7 @@ public class Table
 				s = 8;			
 			}
 			else if(domain [j].getName().equalsIgnoreCase("java.lang.Character")){
-			    b[0] = (byte) ((char) tup[j] & 0xff);
+			    b[0] = (byte) ((Character) tup[j] & 0xff);
 				s = 1;			
 			}
 			else{
