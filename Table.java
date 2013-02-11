@@ -257,7 +257,6 @@ public class Table
 	if(!keepAllAttributes){
 		attrDomSize--;	
 	}
-	System.out.println(attrDomSize);
 	
 	Table result = new Table (name + count++, new String [attrDomSize], new Class [attrDomSize], key);
 		
@@ -276,11 +275,12 @@ public class Table
 	*/
 	for (int i=0; i<table2.getAttributeLength()-1; i++){
 		if (keepAllAttributes && table2.getAttributeAt(i)==postfix[1]){
+			System.out.println("We should never get here");
 			result.attribute[this.getAttributeLength()+i+skipCounter] = postfix[1];
 			skipCounter=0;
 			
 		}
-		else if (table2.getAttributeAt(i).toString()==postfix[1]){
+		else if (table2.getAttributeAt(i).toString()=="name"){
 			skipIndex = i;
 			skipCounter--;
 		}
