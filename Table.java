@@ -247,7 +247,6 @@ public class Table
      */
     public Table join (String condition, Table table2)
     { 
-    { 
         out.println ("RA> " + name + ".join (" + condition + ", " + table2.name + ")");
 	
 	String [] postfix = infix2postfix(condition);
