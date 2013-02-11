@@ -337,7 +337,7 @@ public class Table
 		
 		skipCounter = 0;
 		for(int t2FillIndex=0; t2FillIndex<t2FillLimit; t2FillIndex++){
-			if(table2.getValueAt(t2FillIndex, table2.tupes.get(table2MatchIndex))==postfix[1] && !keepAllAttributes){
+			if(table2.getValueAt(t2FillIndex, table2.tuples.get(table2MatchIndex))==postfix[1] && !keepAllAttributes){
 				skipCounter--;
 				continue;
 			}
