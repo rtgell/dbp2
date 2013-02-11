@@ -250,12 +250,18 @@ public class Table
         out.println ("RA> " + name + ".join (" + condition + ", " + table2.name + ")");
 	
 	String [] postfix = infix2postfix(condition);
-	boolean keepAllAttributes = (postfix[1].substring(0, 1).equals("s."));
+	boolean keepAllAttributes = (postfix[1].substring(0, 2).equals("s."));
 		 
 	int attrDomSize = this.getAttributeLength() + table2.getAttributeLength();
 	
+	String rightCondName;
+	
 	if(!keepAllAttributes){
-		attrDomSize--;	
+		attrDomSize--;
+		rightCondName=postfix[1];
+	}
+	else{
+		rightCondName=postfix[1].substring(2);
 	}
 	
 	String [] resultAttribute = new String[attrDomSize];
@@ -275,12 +281,10 @@ public class Table
 	Else, skip the table2 attribute named in the condition
 	*/
 	for (int i=0; i<table2.getAttributeLength(); i++){
-		if (keepAllAttributes && table2.getAttributeAt(i).equals(postfix[1])){
+		if (keepAllAttributes && table2.getAttributeAt(i).equals(rightCondName)){
 			resultAttribute[this.getAttributeLength()+i+skipCounter] = postfix[1];
-			skipCounter=0;
-			
 		}
-		else if (table2.getAttributeAt(i).equals(postfix[1])){
+		else if (table2.getAttributeAt(i).equals(rightCondName)){
 			skipIndex = i;
 			skipCounter--;
 		}
@@ -312,7 +316,7 @@ public class Table
 		int table1MatchIndex=0;
 		int table2MatchIndex=0;
 		for (int n=0; n<table2.tuples.size(); n++){
-			if( this.getValueAt(this.columnPos(postfix[0]), this.tuples.get(m)).equals(table2.getValueAt(table2.columnPos(postfix[1]), table2.tuples.get(n))) ){
+			if( this.getValueAt(this.columnPos(postfix[0]), this.tuples.get(m)).equals(table2.getValueAt(table2.columnPos(rightCondName), table2.tuples.get(n))) ){
 				table2MatchIndex = n;
 				break;
 			}
@@ -331,13 +335,11 @@ public class Table
 		} //Adds all items from table1 tuple at index m to resultTup
 		
 		int t2FillLimit=table2.getAttributeLength();
-		if(keepAllAttributes){
-			t2FillLimit+=1;
-		}
 		
 		skipCounter = 0;
 		for(int t2FillIndex=0; t2FillIndex<t2FillLimit; t2FillIndex++){
-			if(table2.getAttributeAt(t2FillIndex).equals(postfix[1]) && !keepAllAttributes){
+			out.println(t2FillIndex);
+			if(table2.getAttributeAt(t2FillIndex).equals(rightCondName) && !keepAllAttributes){
 				skipCounter--;
 				continue;
 			}
