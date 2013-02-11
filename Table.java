@@ -336,11 +336,11 @@ public class Table
 			skipCounter=0;
 		} //Adds all unskipped items from the matched tuple in table2
 		
-		for(int fucker=0; fucker<attrDomSize; fucker++){
-			System.out.println(resultTup[fucker]);
-		}
+		//for(int fucker=0; fucker<attrDomSize; fucker++){
+		//	System.out.println(resultTup[fucker]);
+		//}
 		
-		result.tuples.add(resultTup);
+		result.tuples.set(m, resultTup);
 	}
 
         return result;
