@@ -339,7 +339,9 @@ public class Table
 		//	System.out.println(resultTup[fucker]);
 		//}
 		
-		result.insert(resultTup);
+		for(int blargh=0; blargh<attrDomSize; blargh++){
+			result.tuples.get(m)[blargh]=resultTup[blargh];
+		}
 	}
 	for (int tk=0; tk<4; tk++){
 		for(int kj=0; kj<attrDomSize; kj++){
