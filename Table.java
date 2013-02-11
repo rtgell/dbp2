@@ -303,10 +303,10 @@ public class Table
 		
 	Comparable [] resultTup = new Comparable[attrDomSize];
 		
-	for(int m=0; m<this.getAttributeLength()-1; m++){
+	for(int m=0; m<this.tuples.size(); m++){
 		int table1MatchIndex=0;
 		int table2MatchIndex=0;
-		for (int n=0; n<table2.getAttributeLength()-1; n++){
+		for (int n=0; n<table2.tuples.size(); n++){
 			try{
 				Comparable [] test1 =this.tuples.get(m);
 			}
@@ -319,11 +319,11 @@ public class Table
 			catch(IndexOutOfBoundsException e){
 				System.err.println("Out of bounds on n(value "+n+"): "+ e.getMessage());
 			}
-		//	if( this.getValueAt(this.columnPos(postfix[0]), this.tuples.get(m)) == table2.getValueAt(table2.columnPos(postfix[1]), table2.tuples.get(n)) ){
-		//		table1MatchIndex = m;
-		//		table2MatchIndex = n;
-		//		break;
-		//	}
+			if( this.getValueAt(this.columnPos(postfix[0]), this.tuples.get(m)) == table2.getValueAt(table2.columnPos(postfix[1]), table2.tuples.get(n)) ){
+				table1MatchIndex = m;
+				table2MatchIndex = n;
+				break;
+			}
 		} //Matches a tuple from each table that meets the condition
 		
 		for(int t1FillIndex=0; t1FillIndex<this.getAttributeLength(); t1FillIndex++){
