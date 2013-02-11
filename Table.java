@@ -526,7 +526,7 @@ public class Table
     private boolean evalTup (String [] postfix, Comparable [] tup)
     {
         if (postfix == null) return true;
-        Stack <Comparable <?>> s = new Stack <> ();
+        Stack <Comparable> s = new Stack <Comparable> ();
 	//stack-based postfix evaluation
         for (String token : postfix) {
 	//if it is a comparison operator, we need to pop two strings
