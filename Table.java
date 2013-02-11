@@ -198,7 +198,6 @@ public class Table
         		result.insert(table2.tuples.get(i));
         	}
         }
-
         return result;
     } // union
 
@@ -342,7 +341,7 @@ public class Table
 		
 		result.insert(resultTup);
 	}
-
+	result.print();
         return result;
     } // join
 /***************************************************************************
