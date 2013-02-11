@@ -340,7 +340,7 @@ public class Table
 		//}
 		
 		for(int blargh=0; blargh<attrDomSize; blargh++){
-			result.tuples.get(m)[blargh]=resultTup[blargh];
+			result.tuples.add(m, resultTup);
 		}
 	}
 	for (int tk=0; tk<4; tk++){
