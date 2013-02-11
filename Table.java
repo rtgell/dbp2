@@ -335,14 +335,13 @@ public class Table
 			skipCounter=0;
 		} //Adds all unskipped items from the matched tuple in table2
 		
-		//for(int fucker=0; fucker<attrDomSize; fucker++){
-		//	System.out.println(resultTup[fucker]);
-		//}
-		
-		for(int blargh=0; blargh<attrDomSize; blargh++){
-			result.tuples.add(m, resultTup);
+		result.tuples.add(m, resultTup);
+		System.out.println("Test after add: ");
+		for(int fuck=0; fuck<attrDomSize; fuck++){
+			System.out.println(resultTup[Fuck]);
 		}
 	}
+	System.out.println("Test before result: ");
 	for (int tk=0; tk<4; tk++){
 		for(int kj=0; kj<attrDomSize; kj++){
 			System.out.println(result.tuples.get(tk)[kj]);
