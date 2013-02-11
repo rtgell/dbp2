@@ -258,12 +258,13 @@ public class Table
 		attrDomSize--;	
 	}
 	
-	Table result = new Table (name + count++, new String [attrDomSize], new Class [attrDomSize], key);
+	String [] resultAttribute = new String[attrDomSize];
+	Class [] resultDomain = new Class[attrDomSize];
 		
 	//Sets the attribute and domain arrays of the result to the same of this table
 	for (int initialize=0; initialize<this.getAttributeLength(); initialize++){
-		result.attribute[initialize] = this.getAttributeAt(initialize);
-		result.domain[initialize] = this.getDomainAt(initialize);
+		resultAttribute[initialize] = this.getAttributeAt(initialize);
+		resultDomain[initialize] = this.getDomainAt(initialize);
 	}
 	
 	int skipIndex = -1;
@@ -275,7 +276,7 @@ public class Table
 	*/
 	for (int i=0; i<table2.getAttributeLength(); i++){
 		if (keepAllAttributes && table2.getAttributeAt(i).equals(postfix[1])){
-			result.attribute[this.getAttributeLength()+i+skipCounter] = postfix[1];
+			resultAttribute[this.getAttributeLength()+i+skipCounter] = postfix[1];
 			skipCounter=0;
 			
 		}
@@ -284,7 +285,7 @@ public class Table
 			skipCounter--;
 		}
 		else{
-			result.attribute[this.getAttributeLength()+i+skipCounter] = table2.getAttributeAt(i);
+			resultAttribute[this.getAttributeLength()+i+skipCounter] = table2.getAttributeAt(i);
 		}
 	}
 		
@@ -298,9 +299,11 @@ public class Table
 			skipCounter--;
 		}
 		else{
-			result.domain[this.getDomainLength()+skipCounter+j] = table2.getDomainAt(j);
+			resultDomain[this.getDomainLength()+skipCounter+j] = table2.getDomainAt(j);
 		}
 	}
+	
+	Table result = new Table (name + count++, resultAttribute, resultDomain, key);
 		
 	boolean noMatch=false;
 		
