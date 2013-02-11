@@ -345,15 +345,14 @@ public class Table
 		} //Adds all unskipped items from the matched tuple in table2
 		
 		result.tuples.add(m, resultTup);
-		//System.out.println("Test after add: ");
-		//for(int fuck=0; fuck<attrDomSize; fuck++){
-		//	System.out.println(result.tuples.get(m)[fuck]);
-		//}
-		if(m==4){
-			System.out.println("How did m get to 4?");
-		}
+		System.out.println("Test after add: ");
+		for(int tk=0; tk<=m; tk++){
+			System.out.println("For m="+ m+": ");
+		for(int fuck=0; fuck<attrDomSize; fuck++){
+			System.out.println(result.tuples.get(tk)[fuck]);
+		}}
 	}
-	System.out.println("Test before result: ");
+	//System.out.println("Test before result: ");
 	//for (int tk=0; tk<4; tk++){
 	//	for(int kj=0; kj<attrDomSize; kj++){
 	//		System.out.println(result.tuples.get(tk)[kj]);
