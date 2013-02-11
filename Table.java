@@ -298,10 +298,11 @@ public class Table
 	for (int j=0; j<table2.getDomainLength(); j++){
 		if(j==skipIndex){
 			skipCounter--;
-			continue;
 		}
-		result.domain[this.getDomainLength()+skipCounter+j] = table2.getDomainAt(j);
-		skipCounter=0;
+		else{
+			result.domain[this.getDomainLength()+skipCounter+j] = table2.getDomainAt(j);
+			skipCounter=0;
+		}
 	}
 		
 	Comparable [] resultTup = new Comparable[attrDomSize];
